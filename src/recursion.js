@@ -127,23 +127,94 @@ var range = function(x, y, output=[]) {
 };
 
 
+
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
-var exponent = function(base, exp) {
+
+
+
+var exponent = function(base, exp, total=1) {
+
+  // base
+  if(exp === 0){
+    return total;
+  }
+
+  // if(exp === 1){
+  //   return total;
+  // }
+
+
+  // recursion
+
+  if(exp > 0){
+    total *= base;
+    return exponent(base, exp - 1, total)
+  }
+
+  if(exp < 0){
+    // if(count === 1){
+    //   count = -1
+    // }
+    // count = exp;
+    // // total = base ** exp;
+    // total *= 1/base
+    // count --
+    total *= 1/base;
+    return exponent(base, exp + 1, total);
+  }
+
 };
+
 
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
+
+
 var powerOfTwo = function(n) {
+
+  // base
+  if(n === 1){
+    return true;
+  }
+
+  if(n % 2 !== 0){
+    return false
+  }
+
+  if(n === 0){
+    return false;
+  }
+
+  // recursion
+  
+ if(n > 1){
+  n /= 2
+  return powerOfTwo(n);
+ }
+
 };
 
+
+
 // 9. Write a function that accepts a string a reverses it.
-var reverse = function(string) {
+
+
+var reverse = function(string, output=[]) {
+  // base
+  if(string.length === 0){
+    return output.join('');
+  }
+
+  // recursion
+  output.unshift(string[0]);
+  return reverse(string.slice(1), output);
+
 };
 
 // 10. Write a function that determines if a string is a palindrome.
