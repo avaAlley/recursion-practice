@@ -218,7 +218,26 @@ var reverse = function(string, output=[]) {
 };
 
 // 10. Write a function that determines if a string is a palindrome.
-var palindrome = function(string) {
+
+
+var palindrome = function(string, array=[]) {
+  // base
+  if(string.length === 0){
+    let newString = array.join('');
+    let revArray = array.reverse();
+    let revString = array.join('');
+    if(newString === revString){
+      return true
+    } else {
+      return false;
+    }
+  }
+
+  // recursion
+  string = string.replace(/\s/g, '')
+  array.push(string[0].toLowerCase());
+  return palindrome(string.slice(1), array);
+
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -226,6 +245,8 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+
+
 var modulo = function(x, y) {
   
 };
@@ -233,7 +254,23 @@ var modulo = function(x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-var multiply = function(x, y) {
+
+
+var multiply = function(x, y, sum=0) {
+
+  if(y === 0){
+    return sum;
+  }
+  
+  if(y > 0){
+    sum += x
+    y--;
+  } else {
+    sum -= x
+    y++;
+  }
+  return multiply(x, y, sum);
+
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
@@ -255,34 +292,105 @@ var gcd = function(x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
+
+
 var compareStr = function(str1, str2) {
+  // base
+
+  if(str1.length === 0 && str2.length === 0){
+    return true;
+  }
+
+
+  // recursion
+  if(str1[0] !== str2[0]){
+    return false
+  }
+  return compareStr(str1.slice(1), str2.slice(1));
+
 };
+
+
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-var createArray = function(str){
+var createArray = function(str, array=[]){
+  // base
+  if(str.length === 0){
+    return array;
+  }
+
+  // recursion
+  array.push(str[0]);
+  return createArray(str.slice(1), array);
+
 };
 
 // 17. Reverse the order of an array
-var reverseArr = function (array) {
+var reverseArr = function (array, revArray=[]) {
+  // base
+  if(array.length === 0){
+    return revArray;
+
+  }
+
+  // recursion
+  revArray.unshift(array[0]);
+  return reverseArr(array.slice(1), revArray)
+
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
-var buildList = function(value, length) {
+
+
+var buildList = function(value, length, array=[]) {
+  // base
+  if(length === 0){
+    return array;
+  }
+
+  // recursion
+  array.push(value);
+  return buildList(value, length - 1, array)
+
 };
+
 
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function(array, value) {
+
+
+var countOccurrence = function(array, value, output=0) {
+  // base
+  if(array.length === 0){
+    return output;
+  }
+
+  // recursion
+  if(array[0] === value){
+    output++
+  }
+  return countOccurrence(array.slice(1), value, output);
+
 };
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
+
+
 var rMap = function(array, callback, output=[]) {
-  
+  // base
+  if(array.length === 0){
+    return output;
+  }
+
+  // recursion
+  output.push(callback(array[0]));
+  return rMap(array.slice(1), callback, output);
+
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -317,7 +425,17 @@ var fibonacci = function(n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
+
+
 var nthFibo = function(n) {
+  // base
+  if(){
+
+  }
+
+  // recursion
+  
+
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
