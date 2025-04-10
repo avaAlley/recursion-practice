@@ -427,26 +427,65 @@ var fibonacci = function(n) {
 // nthFibo(3); // 2
 
 
-var nthFibo = function(n) {
+var nthFibo = function(n, sequence = [0, 1]) {
   // base
-  if(){
+  
+  if(n === 0){
+    return sequence[n];
+  }
+  
+  if(n === 1){
+    return sequence[n];
+  }
 
+  if(sequence.length - 1 === n){
+    return sequence[n];
+  }
+  if(n < 0){
+    return null;
   }
 
   // recursion
-  
+
+  sequence.push(sequence[sequence.length - 2] + sequence[sequence.length - 1]);
+
+  return nthFibo(n, sequence);
 
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
-var capitalizeWords = function(input) {
+
+
+var capitalizeWords = function(input, arr=[]) {
+  // base
+  if(input.length === 0){
+    return arr;
+  }
+
+  // recursion
+  arr.push(input[0].toUpperCase());
+  return capitalizeWords(input.slice(1), arr);
+
 };
+
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
-var capitalizeFirst = function(array) {
+
+
+var capitalizeFirst = function(array, output=[]) {
+  // base
+  if(array.length === 0){
+    return output;
+
+  }
+
+  // recursion
+  output.push(array[0][0].toUpperCase() + array[0].slice(1));
+  return capitalizeFirst(array.slice(1), output)
+
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -458,6 +497,7 @@ var capitalizeFirst = function(array) {
 //   e: {e: {e: 2}, ee: 'car'}
 // };
 // nestedEvenSum(obj1); // 10
+
 var nestedEvenSum = function(obj) {
 };
 
@@ -468,8 +508,25 @@ var flatten = function(arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
+
+
+var letterTally = function(str, obj={}) {
+  // base
+  if(str.length === 0){
+    return obj;
+  }
+
+  // recursion
+  if(obj[str[0]] === 1){
+    obj[str[0]]++
+  } else {
+    obj[str[0]] = 1
+  }
+
+  // obj[str[0]] = count;
+  return letterTally(str.slice(1), obj);
 };
+
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
 // elements they should be replaced with a single copy of the element. The order of the
